@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stats Court - Upload CSV</title>
+    <!-- Inter font and external stylesheet -->
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Header with logo and app name -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Stats Court Logo">
+        Stats Court
+    </div>
+
+    <div class="container">
+        <h1>Upload Your CSV</h1>
+        <p>Upload your dataset to begin statistical analysis.</p>
+        {% if error %}
+        <div style="background:#ff4f4f; color:#fff; padding:12px; border-radius:8px; margin-bottom:18px;">
+            {{ error }}
+        </div>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            <label for="csv_file">Choose CSV File</label>
+            <input type="file" name="csv_file" id="csv_file" accept=".csv" required>
+            <small style="color:#b0b8c1;">Accepted format: CSV file with headers in the first row.</small>
+            <button type="submit">Continue</button>
+        </form>
+
+        {% if df_html %}
+        <div class="card">
+            <h2>Data Preview</h2>
+            {{ df_html | safe }}
+        </div>
+        {% endif %}
+    </div>
+<footer class="footer">
+    <span>&copy; 2025 Made with ❤️ by Surabhi Pandey</span>
+</footer>
+</body>
+</html>
+
+
+
+

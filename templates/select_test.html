@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Test - Stats Court</title>
+    <!-- Inter font and external stylesheet -->
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Header with logo and app name -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Stats Court Logo">
+        Stats Court
+    </div>
+
+    <div class="container">
+        <h1>Select Statistical Test</h1>
+        <div class="card">
+            {% if error %}
+            <div style="background:#ff4f4f; color:#fff; padding:12px; border-radius:8px; margin-bottom:18px;">
+                {{ error }}
+            </div>
+            {% endif %}
+            <form method="POST">
+                <label for="test_type">Choose Test Type</label>
+                <select name="test_type" id="test_type" onchange="showFields(); showDescription();" required>
+                    <option value="">-- Select Test --</option>
+                    <option value="chi2">Chi-square</option>
+                    <option value="ttest">T-test</option>
+                    <option value="correlation">Correlation</option>
+                </select>
+                <!-- Description will appear here -->
+                <div id="test-desc" style="margin-bottom:18px; color:#b0b8c1; font-size:1rem;"></div>
+
+                <div id="chi2-fields" class="field-group" style="display:none;">
+                    <label for="col1">Column 1 (Categorical)</label>
+                    <select name="col1" id="col1">
+                        {% for col in cat_cols %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="col2">Column 2 (Categorical)</label>
+                    <select name="col2" id="col2">
+                        {% for col in cat_cols %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="ttest-fields" class="field-group" style="display:none;">
+                    <label for="num_col">Numerical Column</label>
+                    <select name="num_col" id="num_col">
+                        {% for col in num_cols %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="cat_col">Categorical Column (Column having two unique values. e.g. 1/0, yes/no)</label>
+                    <select name="cat_col" id="cat_col">
+                        {% for col in binary_cols %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="correlation-fields" class="field-group" style="display:none;">
+                    <label for="corr1">Numerical Column 1</label>
+                    <select name="corr1" id="corr1">
+                        {% for col in num_cols %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="corr2">Numerical Column 2</label>
+                    <select name="corr2" id="corr2">
+                        {% for col in num_cols %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="method">Method</label>
+                    <select name="method" id="method">
+                        <option value="pearson">Pearson</option>
+                        <option value="spearman">Spearman</option>
+                    </select>
+                </div>
+                <button type="submit">Run Test</button>
+            </form>
+        </div>
+
+        {% if df_html %}
+        <div class="card">
+            <h2>Data Preview</h2>
+            {{ df_html|safe }}
+        </div>
+        {% endif %}
+
+        <div class="card">
+            <h3>Report Links</h3>
+            <a href="{{ url_for('view_report') }}" target="_blank" style="color:#4f8cff;">View Report</a> |
+            <a href="{{ url_for('download_report') }}" style="color:#4f8cff;">Download Report</a>
+        </div>
+    </div>
+    <script>
+        function showFields() {
+            const test = document.getElementById("test_type").value;
+            document.querySelectorAll(".field-group").forEach(el => el.style.display = "none");
+            if (test) document.getElementById(`${test}-fields`).style.display = "block";
+        }
+        function showDescription() {
+            const test = document.getElementById("test_type").value;
+            const desc = {
+                chi2: "Use the Chi-square test to check if two categorical variables are associated (e.g., Gender vs. Preference).",
+                ttest: "Use the T-test to compare the means of a numeric variable between two groups (e.g., Test Score by Gender).",
+                correlation: "Use Correlation to measure the strength and direction of relationship between two numeric variables (e.g., Height vs. Weight)."
+            };
+            document.getElementById("test-desc").innerText = desc[test] || "";
+        }
+        window.onload = function() {
+            showFields();
+            showDescription();
+        };
+    </script>
+<footer class="footer">
+    <span>&copy; 2025 Made with ❤️ by Surabhi Pandey</span>
+</footer>
+</body>
+</html>
+

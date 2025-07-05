@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap');
+
+body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: #181c24;
+    color: #f4f6fb;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background: #232a36;
+    color: #4f8cff;
+    padding: 24px 0;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.header img {
+    height: 48px;
+    width: 48px;
+    border-radius: 8px;
+    background: #fff;
+    object-fit: contain;
+}
+
+.container {
+    max-width: 700px;
+    margin: 48px auto;
+    padding: 36px;
+    background: #232a36;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+h1, h2, h3 {
+    color: #4f8cff;
+    font-weight: 700;
+    margin-bottom: 18px;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+label {
+    font-weight: 600;
+    margin-top: 18px;
+    display: block;
+    color: #f4f6fb;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    border: 1px solid #2c3440;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: #181c24;
+    color: #f4f6fb;
+}
+
+input::placeholder, select, option {
+    color: #b0b8c1;
+    background: #181c24;
+}
+
+button {
+    background: #4f8cff;
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #3766b1;
+}
+
+.card {
+    background: #232a36;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    padding: 28px;
+    margin-bottom: 28px;
+}
+
+.preview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #181c24;
+    color: #f4f6fb;
+}
+
+.preview-table th, .preview-table td {
+    border: 1px solid #2c3440;
+    padding: 8px;
+    text-align: left;
+}
+
+.preview-table th {
+    background-color: #232a36;
+    color: #4f8cff;
+}
+
+.footer {
+    width: 100%;
+    background: #232a36;
+    color: #b0b8c1;
+    text-align: center;
+    padding: 18px 0 12px 0;
+    font-size: 1rem;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 800px) {
+    .container {
+        padding: 16px;
+        margin: 16px;
+    }
+    .header {
+        font-size: 1.3rem;
+        padding: 16px 0;
+    }
+    .footer {
+        font-size: 0.95rem;
+        padding: 12px 0 8px 0;
+    }
+}
