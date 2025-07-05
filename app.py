@@ -132,6 +132,7 @@ def download_report():
     return send_file(RESULT_PATH, as_attachment=True, download_name="report.html")
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False, port=5050)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
 
 
